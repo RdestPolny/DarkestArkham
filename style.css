@@ -1,0 +1,69 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: #eee;
+  margin: 0;
+  padding: 20px;
+}
+
+.recruitment-window,
+.team-window {
+  max-width: 1000px;
+  margin: 0 auto 20px;
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.scroll-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #444;
+  padding: 10px;
+}
+
+.hero-list,
+.team-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.hero-card {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #333;
+  padding: 10px;
+  background-color: #333;
+  border-radius: 4px;
+}
+
+.hero-card img {
+  width: 64px;
+  height: 64px;
+}
+
+.portrait-placeholder {
+  width: 64px;
+  height: 64px;
+  background-color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eee;
+  font-weight: bold;
+}
+
+.controls {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 16px;
+  cursor: pointer;
+}
