@@ -1,0 +1,50 @@
+[
+  {
+    "id": "detective",
+    "name": "Detektyw",
+    "class": "Śledczy",
+    "skills": ["Pistolet", "Przesłuchanie"],
+    "description": "Doświadczony śledczy z ciemnymi sekretami.",
+    "attack": 12,
+    "defense": 5,
+    "max_health": 100,
+    "max_sanity": 80,
+    "speed": 10
+  },
+  {
+    "id": "occultist",
+    "name": "Okultysta",
+    "class": "Mistyk",
+    "skills": ["Zaklęcia", "Rytuały"],
+    "description": "Mistyk parający się zakazaną magią.",
+    "attack": 8,
+    "defense": 3,
+    "max_health": 80,
+    "max_sanity": 120,
+    "speed": 8
+  },
+  {
+    "id": "brute",
+    "name": "Brutal",
+    "class": "Najemnik",
+    "skills": ["Mocny cios", "Tarcza"],
+    "description": "Potężny wojownik, który nie zna strachu.",
+    "attack": 15,
+    "defense": 7,
+    "max_health": 120,
+    "max_sanity": 60,
+    "speed": 6
+  },
+  {
+    "id": "scholar",
+    "name": "Uczony",
+    "class": "Badacz",
+    "skills": ["Wiedza", "Artefakty"],
+    "description": "Erudyta zgłębiający tajemne księgi.",
+    "attack": 6,
+    "defense": 4,
+    "max_health": 70,
+    "max_sanity": 110,
+    "speed": 9
+  }
+]
