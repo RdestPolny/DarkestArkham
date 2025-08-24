@@ -1,1 +1,99 @@
-Test
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<title>Parallax 2D</title>
+<style>
+  canvas {
+    image-rendering: pixelated;
+    width: 800px;
+    height: 450px;
+    background: #87ceeb; /* niebo */
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+<canvas id="game" width="160" height="90"></canvas>
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const keys = { left:false, right:false, jump:false };
+document.addEventListener("keydown", e => {
+  if (e.code === "ArrowLeft") keys.left = true;
+  if (e.code === "ArrowRight") keys.right = true;
+  if (e.code === "Space") keys.jump = true;
+});
+document.addEventListener("keyup", e => {
+  if (e.code === "ArrowLeft") keys.left = false;
+  if (e.code === "ArrowRight") keys.right = false;
+  if (e.code === "Space") keys.jump = false;
+});
+
+// --- Parallax tła ---
+const bg1 = new Image(); bg1.src = "ocean.png";     // warstwa dalsza
+const bg2 = new Image(); bg2.src = "city.png";      // warstwa bliższa
+let bg1X = 0, bg2X = 0;
+
+// --- Postać ---
+const hero = {
+  x: 80, y: 70, vx:0, vy:0, width:8, height:8, onGround:false
+};
+
+function update(dt) {
+  // Ruch poziomy
+  if (keys.left) hero.vx = -30;
+  else if (keys.right) hero.vx = 30;
+  else hero.vx = 0;
+
+  // Skok
+  if (keys.jump && hero.onGround) {
+    hero.vy = -60;
+    hero.onGround = false;
+  }
+
+  // Grawitacja i pozycja
+  hero.vy += 120 * dt;         // grawitacja
+  hero.x += hero.vx * dt;
+  hero.y += hero.vy * dt;
+
+  // Podłoga
+  if (hero.y + hero.height >= canvas.height - 8) {
+    hero.y = canvas.height - 8 - hero.height;
+    hero.vy = 0;
+    hero.onGround = true;
+  }
+
+  // Parallax
+  bg1X -= hero.vx * dt * 0.2;  // ocean (wolniejszy)
+  bg2X -= hero.vx * dt * 0.4;  // miasto (szybsze)
+}
+
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // Warstwy tła (parallax)
+  ctx.drawImage(bg1, bg1X % canvas.width, 0);
+  ctx.drawImage(bg1, (bg1X % canvas.width) + canvas.width, 0);
+  ctx.drawImage(bg2, bg2X % canvas.width, 0);
+  ctx.drawImage(bg2, (bg2X % canvas.width) + canvas.width, 0);
+
+  // Postać (prostokąt – zastąp sprite’em)
+  ctx.fillStyle = "#000";
+  ctx.fillRect(hero.x, hero.y, hero.width, hero.height);
+}
+
+let lastTime = 0;
+function gameLoop(timestamp) {
+  const dt = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  update(dt);
+  draw();
+  requestAnimationFrame(gameLoop);
+}
+requestAnimationFrame(gameLoop);
+</script>
+</body>
+</html>
